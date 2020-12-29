@@ -10,6 +10,10 @@ function fcode() {
   [[ -n "${REPO_NAME}" ]] && code "$(ghq root)/${REPO_NAME}"
 }
 
+function fcws() {
+  code $(find ~/vs-works -type f -name *.code-workspace | fzf-tmux --reverse)
+}
+
 # Like normal cd but opens an interactive navigation window when called with no arguments.
 # For ls, use -FG instead of --color=always on osx.s
 function fcd() {
@@ -35,8 +39,7 @@ function fcd() {
 # fd - cd to selected directory
 fd() {
   local dir
-  dir=$(find ${1:-.} -path '*/\.*' -prune \
-                  -o -type d -print 2> /dev/null | fzf +m) &&
+  dir=$(find ${1:-.} -path '*/\.*' -prune -o -type d -print 2> /dev/null | fzf +m) &&
   cd "$dir"
 }
 
@@ -52,8 +55,7 @@ fbr() {
 fbrm() {
   local branches branch
   branches=$(git branch --all | grep -v HEAD) &&
-  branch=$(echo "$branches" |
-           fzf-tmux -d $(( 2 + $(wc -l <<< "$branches") )) +m) &&
+  branch=$(echo "$branches" | fzf-tmux -d $(( 2 + $(wc -l <<< "$branches") )) +m) &&
   git checkout $(echo "$branch" | sed "s/.* //" | sed "s#remotes/[^/]*/##")
 }
 
@@ -78,8 +80,7 @@ fstash() {
   local out q k sha
   while out=$(
     git stash list --pretty="%C(yellow)%h %>(14)%Cgreen%cr %C(blue)%gs" |
-    fzf --ansi --no-sort --query="$q" --print-query \
-        --expect=ctrl-d,ctrl-b);
+    fzf --ansi --no-sort --query="$q" --print-query --expect=ctrl-d,ctrl-b);
   do
     mapfile -t out <<< "$out"
     q="${out[0]}"
