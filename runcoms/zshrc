@@ -38,3 +38,9 @@ export FZF_DEFAULT_OPTS='--height 40% --reverse --border'
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/runcoms/functions/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/runcoms/functions/init.zsh"
 fi
+
+# local config 
+# OS別の環境変数や公開したくないセキュリティ関連の情報はローカルファイルで管理するようにする
+if [ -f ~/.zshrc.local ]; then
+    source ~/.zshrc.local
+fi
