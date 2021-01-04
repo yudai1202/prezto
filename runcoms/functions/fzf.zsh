@@ -8,6 +8,7 @@ function fgh() {
 function fcode() {
   declare -r REPO_NAME="$(ghq list >/dev/null | fzf-tmux --reverse +m)"
   [[ -n "${REPO_NAME}" ]] && code "$(ghq root)/${REPO_NAME}"
+  cd "$(ghq root)/${REPO_NAME}"
 }
 
 function fcws() {

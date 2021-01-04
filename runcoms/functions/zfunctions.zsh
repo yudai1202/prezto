@@ -9,7 +9,7 @@ function fghc() {
   local repos
   repos=$(curl --location --silent --request GET 'https://api.github.com/user/repos?per_page=100' \
   --header 'Accept: application/vnd.github.v3+json' \
-  --header 'Authorization: Basic $GITHUB_AUTH_REPO' \
+  --header "Authorization: Basic $GITHUB_AUTH_REPO" \
   | jq -r '.[].clone_url')
   local repo 
   repo=$(echo $repos | fzf-tmux --reverse +m)
