@@ -39,6 +39,12 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/runcoms/functions/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/runcoms/functions/init.zsh"
 fi
 
+# load aliases
+if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/runcoms/alias.zsh" ]]; then
+  source "${ZDOTDIR:-$HOME}/.zprezto/runcoms/alias.zsh"
+fi
+
+
 # local config 
 # OS別の環境変数や公開したくないセキュリティ関連の情報はローカルファイルで管理するようにする
 if [ -f ~/.zshrc.local ]; then
