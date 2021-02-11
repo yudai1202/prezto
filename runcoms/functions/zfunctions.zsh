@@ -15,3 +15,8 @@ function fghc() {
   repo=$(echo $repos | fzf-tmux --reverse +m)
   [[ -n "$repo" ]] && ghq get $repo
 }
+
+function mkcd() {
+  mkdir "$1"
+  cd $_
+} 
